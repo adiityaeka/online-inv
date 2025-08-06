@@ -284,6 +284,7 @@ button:hover {
   background: #fff8f8;
   padding: 20px;
   border-radius: 10px;
+  min-height: 200px;
 }
 
 .message-board .entry {
@@ -299,6 +300,82 @@ button:hover {
   font-weight: bold;
   color: #d14c6c;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
+  overflow-x: hidden;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  padding: 0 8px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.pagination button,
+.pagination span {
+  padding: 6px 10px;
+  border: none;
+  background: none;
+  color: #5b473d;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.pagination button.active {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.pagination button.disabled {
+  color: #bbb;
+  cursor: default;
+}
+
+button .arrow {
+  display: inline;
+}
+button .text {
+  display: inline;
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    gap: 2px;
+  }
+
+  .pagination button.prev::before {
+    content: "←";
+  }
+
+  .pagination button.next::after {
+    content: "→";
+  }
+
+  .pagination button.prev,
+  .pagination button.next {
+    text-indent: -9999px;
+    position: relative;
+    width: 28px;
+  }
+
+  .pagination button.prev::before,
+  .pagination button.next::after {
+    text-indent: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+    button .text {
+    display: none;
+  }
+}
+
 
 footer {
   margin-top: 30px;
