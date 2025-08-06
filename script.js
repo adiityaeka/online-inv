@@ -1,5 +1,5 @@
 // Countdown
-const targetDate = new Date("June 22, 2026 08:00:00").getTime();
+const targetDate = new Date("December 20, 2025 10:00:00").getTime();
 
 function updateCountdown() {
   const now = new Date().getTime();
@@ -20,12 +20,23 @@ setInterval(updateCountdown, 1000);
 // Message Guestbook
 const form = document.getElementById("messageForm");
 const board = document.getElementById("messageBoard");
+const pagination = document.getElementById("pagination");
 
-function loadMessages() {
+const MESSAGES_PER_PAGE = 5;
+let currentPage = 1;
+
+function loadMessages(page = 1) {
   const messages = JSON.parse(localStorage.getItem("weddingMessages")) || [];
+  const totalPages = Math.ceil(messages.length / MESSAGES_PER_PAGE);
+  currentPage = Math.max(1, Math.min(page, totalPages));
+
   board.innerHTML = "<h3>Messages</h3>";
 
-  messages.forEach(msg => {
+  const start = (currentPage - 1) * MESSAGES_PER_PAGE;
+  const end = start + MESSAGES_PER_PAGE;
+  const visibleMessages = messages.slice(start, end);
+
+  visibleMessages.forEach(msg => {
     const div = document.createElement("div");
     div.className = "entry";
     div.innerHTML = `
@@ -34,6 +45,58 @@ function loadMessages() {
     `;
     board.appendChild(div);
   });
+
+  renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+  pagination.innerHTML = "";
+
+  const createButton = (text, page, disabled = false, active = false) => {
+    const btn = document.createElement("button");
+    btn.innerHTML = text;
+    if (disabled) btn.classList.add("disabled");
+    if (active) btn.classList.add("active");
+    if (!disabled && !active) {
+      btn.addEventListener("click", () => loadMessages(page));
+    }
+    pagination.appendChild(btn);
+  };
+
+  // Previous button
+  createButton('<span class="arrow">←</span> <span class="text">Sebelumnya</span>', currentPage - 1, currentPage === 1);
+
+  let pages = [];
+
+  if (totalPages <= 7) {
+    // Show all pages
+    for (let i = 1; i <= totalPages; i++) pages.push(i);
+  } else {
+    if (currentPage <= 4) {
+      // Near start
+      pages = [1, 2, 3, 4, 5, '...', totalPages];
+    } else if (currentPage >= totalPages - 3) {
+      // Near end
+      pages = [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+    } else {
+      // Middle range
+      pages = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+    }
+  }
+
+  // Render the calculated pages
+  pages.forEach(p => {
+    if (p === '...') {
+      const dots = document.createElement("span");
+      dots.textContent = "...";
+      pagination.appendChild(dots);
+    } else {
+      createButton(p.toString(), p, false, p === currentPage);
+    }
+  });
+
+  // Next button
+  createButton('<span class="text">Selanjutnya</span> <span class="arrow">→</span>', currentPage + 1, currentPage === totalPages);
 }
 
 form.addEventListener("submit", function(e) {
@@ -45,9 +108,10 @@ form.addEventListener("submit", function(e) {
 
   const messages = JSON.parse(localStorage.getItem("weddingMessages")) || [];
   messages.unshift({ name, message });
+  localStorage.setItem("weddingMessages", JSON.stringify(messages));
 
   form.reset();
-  loadMessages();
+  loadMessages(1); // back to first page
 });
 
 loadMessages();
