@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="overlay" id="welcomeOverlay">
+  <div class="overlay-content">
+    <h2>Fulan & Fulanah</h2>
+    <p class="invitee-name">Dear Guest,</p>
+    <button onclick="openInvitation()">Open Invitation</button>
+  </div>
+</div>
+
+<header class="cover">
+  <h1>Fulan & Fulanah</h1>
+  <p>- 01.01.01 -</p>
+
+  <div class="hero-photo">
+    <img src="RANDOM.png" alt="Fulan and Fulanah Photo">
+  </div>
+</header>
+
+<section class="countdown-section">
+  <h2><i>Walimatul 'Urs</i></h2>
+  <div class="countdown-container" id="countdown">
+  <div class="count-box">
+    <div class="count-number" id="days">0</div>
+    <div class="count-label">Hari</div>
+  </div>
+  <div class="count-box">
+    <div class="count-number" id="hours">0</div>
+    <div class="count-label">Hours</div>
+  </div>
+  <div class="count-box">
+    <div class="count-number" id="minutes">0</div>
+    <div class="count-label">Minutes</div>
+  </div>
+</div>
+</section>
+
+<section class="profile-section">
+  <div class="profile-container">
+    <div class="profile-card">
+      <img src="groom.png" alt="Groom Illustration">
+      <h3>Fulan</h3>
+      <p>Anak dari Bapak Fulan dan Ibu Fulanah</p>
+    </div>
+
+    <div class="ampersand">&</div>
+
+    <div class="profile-card">
+      <img src="bride.png" alt="Bride Illustration">
+      <h3>Fulanah</h3>
+      <p>Anak dari Bapak Fulan dan Ibu Fulanah</p>
+    </div>
+  </div>
+</section>
+
+<section class="details">
+  <h2>Wedding Details</h2>
+  <p><strong>Date:</strong> December 20, 2025</p>
+  <p><strong>Location:</strong> Grand Ballroom, Jakarta</p>
+
+  <div class="map">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1983.9643603890942!2d106.8271535161045!3d-6.17511000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3f3aa9e6c85%3A0x2e9b1c03f9db5674!2sGrand%20Ballroom!5e0!3m2!1sen!2sid!4v1699999999999!5m2!1sen!2sid" 
+      width="100%" 
+      height="300" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+  <section class="gallery">
+    <h2>Gallery</h2>
+    <div class="images">
+      <img src="https://via.placeholder.com/200" alt="Photo 1" />
+      <img src="https://via.placeholder.com/200" alt="Photo 2" />
+      <img src="https://via.placeholder.com/200" alt="Photo 3" />
+    </div>
+  </section>
+
+  <section class="messages">
+    <h2>Write a Message for the Bride & Groom</h2>
+    <form id="messageForm">
+      <input type="text" id="guestName" placeholder="Your Name" required />
+      <textarea id="guestMessage" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="message-board" id="messageBoard">
+      <h3>Messages</h3>
+    </div>
+  </section>
+
+  <footer>
+    <p>With love, Fulan & Fulanah</p>
+  </footer>
+
+  <audio id="bgMusic" loop preload="auto">
+  <source src="audio.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+<button id="musicToggle" class="music-btn">
+  <img id="musicIcon" src="unmute.svg" alt="Toggle Music" />
+</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
