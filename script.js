@@ -61,10 +61,15 @@ function renderPagination(totalPages) {
       btn.addEventListener("click", () => loadMessages(page));
     }
     pagination.appendChild(btn);
+    return btn;
   };
 
   // Previous button
-  createButton('<span class="arrow">←</span> <span class="text">Sebelumnya</span>', currentPage - 1, currentPage === 1);
+  createButton(
+  `<img src="arrowle.svg" class="icon" alt="←"><span class="text">Sebelumnya</span>`,
+  currentPage - 1,
+  currentPage === 1
+).classList.add("prev");
 
   let pages = [];
 
@@ -96,7 +101,11 @@ function renderPagination(totalPages) {
   });
 
   // Next button
-  createButton('<span class="text">Selanjutnya</span> <span class="arrow">→</span>', currentPage + 1, currentPage === totalPages);
+createButton(
+  `<span class="text">Selanjutnya</span><img src="arrowri.svg" class="icon" alt="→">`,
+  currentPage + 1,
+  currentPage === totalPages
+).classList.add("next");
 }
 
 form.addEventListener("submit", function(e) {

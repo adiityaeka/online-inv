@@ -324,6 +324,9 @@ button:hover {
   cursor: pointer;
   font-size: 14px;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .pagination button.active {
@@ -336,43 +339,31 @@ button:hover {
   cursor: default;
 }
 
-button .arrow {
-  display: inline;
-}
-button .text {
-  display: inline;
+/* SVG icon style */
+.pagination .icon {
+  width: 16px;
+  height: 16px;
 }
 
+/* Mobile view: icon only */
 @media (max-width: 480px) {
   .pagination {
     gap: 2px;
   }
 
-  .pagination button.prev::before {
-    content: "←";
-  }
-
-  .pagination button.next::after {
-    content: "→";
-  }
-
-  .pagination button.prev,
-  .pagination button.next {
-    text-indent: -9999px;
-    position: relative;
-    width: 28px;
-  }
-
-  .pagination button.prev::before,
-  .pagination button.next::after {
-    text-indent: 0;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-    button .text {
+  .pagination button .text {
     display: none;
+  }
+
+  .pagination button {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .pagination .icon {
+    margin: 0;
   }
 }
 
