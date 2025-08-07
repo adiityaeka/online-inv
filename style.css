@@ -91,7 +91,7 @@ body {
   top: -50px;
   width: 30px;
   height: 30px;
-  background-image: url(flower.png); /* change to your petal image */
+  background-image: url(assets/images/flower.png); /* change to your petal image */
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0.8;

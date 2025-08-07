@@ -66,7 +66,7 @@ function renderPagination(totalPages) {
 
   // Previous button
   createButton(
-  `<img src="arrowle.svg" class="icon" alt="←"><span class="text">Sebelumnya</span>`,
+  `<img src="assets/icons/arrowle.svg" class="icon" alt="←"><span class="text">Sebelumnya</span>`,
   currentPage - 1,
   currentPage === 1
 ).classList.add("prev");
@@ -102,7 +102,7 @@ function renderPagination(totalPages) {
 
   // Next button
 createButton(
-  `<span class="text">Selanjutnya</span><img src="arrowri.svg" class="icon" alt="→">`,
+  `<span class="text">Selanjutnya</span><img src="assets/icons/arrowri.svg" class="icon" alt="→">`,
   currentPage + 1,
   currentPage === totalPages
 ).classList.add("next");
@@ -188,10 +188,10 @@ const musicIcon = document.getElementById("musicIcon");
 musicToggle.addEventListener("click", () => {
   if (bgMusic.muted) {
     bgMusic.muted = false;
-    musicIcon.src = "unmute.svg";
+    musicIcon.src = "assets/icons/unmute.svg";
   } else {
     bgMusic.muted = true;
-    musicIcon.src = "mute.svg";
+    musicIcon.src = "assets/icons/mute.svg";
   }
 });
 
