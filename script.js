@@ -25,7 +25,7 @@ const pagination = document.getElementById("pagination");
 const MESSAGES_PER_PAGE = 5;
 let currentPage = 1;
 
-const SHEET_API_URL = "https://script.google.com/macros/s/AKfycby0GqvsJEiwG6NdqDIxWzJbFQvNsAgVmuOcogGtuYWgJ0BwmcjExKGoBcYsdnmHWl_-yQ/exec"; // Replace with your deployed Apps Script URL
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbx-bKtQ6cFi8rkvYf7eehbFiUywnaoU5SKdfbN8klbhkadvSKDNATU4fddbB8PJRvwyPg/exec"; // Replace with your deployed Apps Script URL
 
 async function fetchMessages() {
   try {
