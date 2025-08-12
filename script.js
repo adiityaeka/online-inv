@@ -25,6 +25,22 @@ const pagination = document.getElementById("pagination");
 const MESSAGES_PER_PAGE = 5;
 let currentPage = 1;
 
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbzIY3An23LFhF-gVaG2hjs70G-tAaLG0eZ_ZplPhBT2_IQghVQGYH4Wo_XM1NDH_0KJig/exec"; // Replace with your deployed Apps Script URL
+
+async function fetchMessages() {
+  try {
+    const res = await fetch(SHEET_API_URL);
+    allMessages = await res.json();
+    localStorage.setItem("weddingMessages", JSON.stringify(allMessages));
+    loadMessages(currentPage);
+  } catch (err) {
+    console.error("Error fetching messages:", err);
+    // fallback to localStorage if offline
+    allMessages = JSON.parse(localStorage.getItem("weddingMessages")) || [];
+    loadMessages(currentPage);
+  }
+}
+
 function loadMessages(page = 1) {
   const messages = JSON.parse(localStorage.getItem("weddingMessages")) || [];
   const totalPages = Math.ceil(messages.length / MESSAGES_PER_PAGE);
@@ -107,6 +123,28 @@ createButton(
   currentPage === totalPages
 ).classList.add("next");
 }
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const name = document.getElementById("guestName").value.trim();
+  const message = document.getElementById("guestMessage").value.trim();
+  if (!name || !message) return;
+
+  try {
+    await fetch(SHEET_API_URL, {
+      method: "POST",
+      body: JSON.stringify({ name, message }),
+      headers: { "Content-Type": "application/json" }
+    });
+    form.reset();
+    fetchMessages(); // refresh messages from server
+  } catch (err) {
+    console.error("Error sending message:", err);
+  }
+});
+
+fetchMessages();
+setInterval(fetchMessages, 10000); // auto refresh every 10s
 
 form.addEventListener("submit", function(e) {
   e.preventDefault();
