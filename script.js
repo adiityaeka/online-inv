@@ -25,7 +25,7 @@ const pagination = document.getElementById("pagination");
 const MESSAGES_PER_PAGE = 5;
 let currentPage = 1;
 
-const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbx-bKtQ6cFi8rkvYf7eehbFiUywnaoU5SKdfbN8klbhkadvSKDNATU4fddbB8PJRvwyPg/exec"; // Replace with your deployed Apps Script URL
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwHOInvFHxDNWjnobL53jMUFKOMv8BgtIhs1jq8Txm-qybVdX3Qr3HUz4JBZbwVpNdoow/exec"; // Replace with your deployed Apps Script URL
 
 async function fetchMessages() {
   try {
@@ -131,13 +131,17 @@ form.addEventListener("submit", async function(e) {
   if (!name || !message) return;
 
   try {
-    await fetch(SHEET_API_URL, {
+    const res = await fetch(SHEET_API_URL, {
       method: "POST",
       body: JSON.stringify({ name, message }),
       headers: { "Content-Type": "application/json" }
     });
+
+    allMessages = await res.json(); // get updated list directly
+    localStorage.setItem("weddingMessages", JSON.stringify(allMessages));
+    loadMessages(currentPage);
+
     form.reset();
-    fetchMessages(); // refresh messages from server
   } catch (err) {
     console.error("Error sending message:", err);
   }
